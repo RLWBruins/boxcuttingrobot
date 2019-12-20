@@ -1,0 +1,169 @@
+<?xml version="1.0" ?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+	<xacro:macro name="abb_irb2400" params="prefix">
+		<xacro:property name="pi" value="3.14159265358979323846264338327950288419716" />
+		<!-- link list -->
+		<link name="${prefix}base_link">
+			<visual>
+				<geometry>
+					<mesh filename="package://yaskawa_gp25_support/meshes/gp25/visual/base_axis.dae" />
+				</geometry>
+				<material name="blue">
+					<color rgba="0 0 1 1"/>
+				</material>
+			</visual>
+			<collision>
+				<geometry>
+					<mesh filename="package://yaskawa_gp25_support/meshes/gp25/collision/base_axis.stl" />
+				</geometry>
+				<material name="yellow">
+					<color rgba="0 1 1 1"/>
+				</material>
+			</collision>
+		</link>
+		<link name="${prefix}vendor_base_link" />
+		<link name="${prefix}link_1">
+			<visual>
+				<geometry>
+					<mesh filename="package://yaskawa_gp25_support/meshes/gp25/visual/s_axis.dae"/>
+				</geometry>
+				<material name="silver">
+					<color rgba="0.8 0.8 0.8 1"/>
+				</material>
+			</visual>
+			<collision>
+				<geometry>
+					<mesh filename="package://yaskawa_gp25_support/meshes/gp25/collision/s_axis.stl" />
+				</geometry>
+				<material name="yellow"/>
+			</collision>
+		</link>
+		<link name="${prefix}link_2">
+			<visual>
+				<geometry>
+					<mesh filename="package://yaskawa_gp25_support/meshes/gp25/visual/l_axis.dae"/>
+				</geometry>
+				<material name="blue"/>
+			</visual>
+			<collision>
+				<geometry>
+					<mesh filename="package://yaskawa_gp25_support/meshes/gp25/collision/l_axis.stl" />
+				</geometry>
+				<material name="yellow"/>
+			</collision>
+		</link>
+		<link name="${prefix}link_3">
+			<visual>
+				<geometry>
+					<mesh filename="package://yaskawa_gp25_support/meshes/gp25/visual/u_axis.dae"/>
+				</geometry>
+				<material name="silver"/>
+			</visual>
+			<collision>
+				<geometry>
+					<mesh filename="package://yaskawa_gp25_support/meshes/gp25/collision/u_axis.stl" />
+				</geometry>
+				<material name="yellow"/>
+			</collision>
+		</link>
+		<link name="${prefix}link_4">
+			<visual>
+				<geometry>
+					<mesh filename="package://yaskawa_gp25_support/meshes/gp25/visual/r_axis.dae"/>
+				</geometry>
+				<material name="blue"/>
+			</visual>
+			<collision>
+				<geometry>
+					<mesh filename="package://yaskawa_gp25_support/meshes/gp25/collision/r_axis.stl" />
+				</geometry>
+				<material name="yellow"/>
+			</collision>
+		</link>
+		<link name="${prefix}link_5">
+			<visual>
+				<geometry>
+					<mesh filename="package://yaskawa_gp25_support/meshes/gp25/visual/b_axis.dae"/>
+				</geometry>
+				<material name="silver"/>
+			</visual>
+			<collision>
+				<geometry>
+					<mesh filename="package://yaskawa_gp25_support/meshes/gp25/collision/b_axis.stl" />
+				</geometry>
+				<material name="yellow"/>
+			</collision>
+		</link>
+		<link name="${prefix}link_6">
+			<visual>
+				<geometry>
+					<mesh filename="package://yaskawa_gp25_support/meshes/gp25/visual/t_axis.dae" />
+				</geometry>
+				<material name="blue"/>
+			</visual>
+			<collision>
+				<geometry>
+					<mesh filename="package://yaskawa_gp25_support/meshes/gp25/collision/t_axis.stl" />
+				</geometry>
+				<material name="yellow"/>
+			</collision>
+		</link>
+		<link name="${prefix}tool0" />
+		<!-- end of link list -->
+		<!-- joint list -->
+		<joint name="${prefix}base_link-base" type="fixed">
+			<parent link="${prefix}base_link" />
+			<child link="${prefix}vendor_base_link" />
+			<origin xyz="0 0 0.505" />
+		</joint>
+		<joint name="${prefix}joint_1" type="revolute">
+			<parent link="${prefix}base_link"/>
+			<child link="${prefix}link_1"/>
+			<origin xyz="0 0 0" />
+			<axis xyz="0 0 1" />
+			<limit lower="${-180 / 180.0 * pi}" upper="${180 / 180.0 * pi}" effort="100" velocity="3.44" />
+		</joint>
+		<joint name="${prefix}joint_2" type="revolute">
+			<parent link="${prefix}link_1"/>
+			<child link="${prefix}link_2"/>
+			<origin xyz="0.150 0 0.505" />
+			<axis xyz="0 1 0" />
+			<limit lower="${-105 / 180.0 * pi}" upper="${155 / 180.0 * pi}" effort="100" velocity="3.32" />
+		</joint>
+		<joint name="${prefix}joint_3" type="revolute">
+			<parent link="${prefix}link_2"/>
+			<child link="${prefix}link_3"/>
+			<origin xyz="0 0 0.760" />
+			<axis xyz="0 -1 0" />
+			<!-- Limited wrt to datasheet to prevent self-collisions -->
+			<limit lower="${-86 / 180.0 * pi}" upper="${163 / 180.0 * pi}" effort="100" velocity="3.67" />
+		</joint>
+		<joint name="${prefix}joint_4" type="revolute">
+			<parent link="${prefix}link_3"/>
+			<child link="${prefix}link_4"/>
+			<origin xyz="0 0 0.200" />
+			<axis xyz="-1 0 0" />
+			<limit lower="${-200 / 180.0 * pi}" upper="${200 / 180.0 * pi}" effort="100" velocity="7.16" />
+		</joint>
+		<joint name="${prefix}joint_5" type="revolute">
+			<parent link="${prefix}link_4"/>
+			<child link="${prefix}link_5"/>
+			<origin xyz="0.795 0 0" />
+			<axis xyz="0 -1 0" />
+			<limit lower="${-150 / 180.0 * pi}" upper="${150 / 180.0 * pi}" effort="100" velocity="7.16" />
+		</joint>
+		<joint name="${prefix}joint_6" type="revolute">
+			<parent link="${prefix}link_5"/>
+			<child link="${prefix}link_6"/>
+			<origin xyz="0.100 0 0" />
+			<axis xyz="-1 0 0" />
+			<limit lower="${-455 / 180.0 * pi}" upper="${455 / 180.0 * pi}" effort="100" velocity="10.82" />
+		</joint>
+		<joint name="${prefix}joint_6-tool0" type="fixed">
+			<parent link="${prefix}link_6" />
+			<child link="${prefix}tool0" />
+			<origin rpy="0 ${-0.5 * pi} ${pi}" />
+		</joint>
+		<!-- end of joint list -->
+	</xacro:macro>
+</robot>

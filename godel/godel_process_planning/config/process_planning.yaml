@@ -1,0 +1,18 @@
+---
+process_planning_params:
+  blend_params:
+    spindle_speed: 0.0
+    approach_speed: 0.5
+    blending_speed: 0.03
+    retract_speed: 0.5
+    traverse_speed: 0.05
+    z_adjust: 0.01
+  scan_params:
+    approach_distance: 0.15
+    traverse_speed: 0.005          
+    quality_metric: 0
+    window_width: 0.02
+    min_qa_value: 0.05
+    max_qa_value: 0.05
+...
+# Eerste traverse_speed is degene die de scansnelheid bepaalt, begin maar op 0.05

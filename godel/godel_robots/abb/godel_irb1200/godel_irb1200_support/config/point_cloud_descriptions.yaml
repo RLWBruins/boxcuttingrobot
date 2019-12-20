@@ -1,0 +1,12 @@
+frame_id: world_frame
+point_cloud_descriptions:
+  - x: -0.196
+    y: 0.6175
+    z: 0.162
+    rx: 0.0
+    ry: 0.0
+    rz: 0.0
+    l: 0.45
+    w: 0.305
+    h: 0.255
+    resolution: 0.005
