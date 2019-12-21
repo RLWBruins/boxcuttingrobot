@@ -252,7 +252,7 @@ SurfaceBlendingService::generateProcessPath(const int& id,
   // Step 1: Generate Blending Paths
   godel_msgs::PathPlanningParameters params;
 
-  /* ORIGINAL GODEL CODE :
+  /* ORIGINAL GODEL CODE : [Removed for the box cutting robot application]
   if (!generateBlendPath(params, mesh, blend_result))
   {
     process_planning_feedback_.last_completed = "Failed to generate blend path for surface " + name;
@@ -295,7 +295,7 @@ SurfaceBlendingService::generateProcessPath(const int& id,
   }
 
   // Step 3: Generate Edge Paths for the given surface
-  /*  ORIGINAL GODEL CODE :
+  /*  ORIGINAL GODEL CODE : [Removed for the box cutting robot application]
   if (!generateEdgePath(surface, edge_result))
   {
     process_planning_feedback_.last_completed = "Failed to generate generate edge path(s) for surface " + name;

@@ -1,0 +1,80 @@
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+*.so.*
+*.a
+*.pyc
+*.eps
+
+# Other build litter #
+######################
+bld
+cmake_install.cmake
+CMakeCache.txt
+CMakeFiles
+Makefile
+
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Vim swapfiles #
+#################
+*.sw?
+
+# Tag files for "Global" command #
+##################################
+GPATH
+GRTAGS
+GSYMS
+GTAGS
+ID
+
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
+
+# OS generated files #
+######################
+.DS_Store*
+ehthumbs.db
+Icon?
+Thumbs.db
+
+#screenshots
+*.png
+
+# build directories
+build/
+bld/
+
+# commonly-named test executables
+ovd_tst
+
+# lyx backup / autosave
+*.lyx~
+*.lyx#
+
+# python script output files etc
+python_examples/frames
+python_examples/*.csv
+python_examples/tile_test
+
+# picasa ini-file (created by picasa when a folder has images, e.g. screenshots from the tests/demos)
+Picasa.ini

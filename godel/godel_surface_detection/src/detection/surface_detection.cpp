@@ -370,9 +370,9 @@ namespace godel_surface_detection
       // Compute mesh from point clouds
       SWRI_PROFILE("mesh-clouds");
 
-      int grootstAantalPoints = 0;
-      pcl::PolygonMesh grootsteMesh;
-      visualization_msgs::Marker grootsteMarker;
+      int highestNumberOfPoints = 0;
+      pcl::PolygonMesh biggestMesh;
+      visualization_msgs::Marker biggestMarker;
 
 
       for (std::size_t i = 0; i < surface_clouds_.size(); i++)
@@ -391,17 +391,19 @@ namespace godel_surface_detection
           marker.id = i;
           marker.color.a = params_.marker_alpha;
 
+          /* ORIGINAL GODEL CODE :
           // Push marker to mesh_markers_
           ROS_INFO_STREAM("Adding a marker for mesh with " + std::to_string(marker.points.size()) + " points");
           mesh_markers_.markers.push_back(marker);
 
           // Push mesh to meshes_
           meshes_.push_back(mesh);
+          */
 
-          if ( grootstAantalPoints == 0 || marker.points.size() > grootstAantalPoints ) {
-            grootstAantalPoints = marker.points.size();
-            grootsteMesh = mesh;
-            grootsteMarker = marker;
+          if ( highestNumberOfPoints == 0 || marker.points.size() > highestNumberOfPoints ) {
+            highestNumberOfPoints = marker.points.size();
+            biggestMesh = mesh;
+            biggestMarker = marker;
           }
         }
         else
@@ -410,10 +412,10 @@ namespace godel_surface_detection
         }
       }
 
-      ROS_INFO_STREAM("Meest aantal points : " << grootstAantalPoints << " points");
-
-      //mesh_markers_.markers.push_back(grootsteMarker);
-      //meshes_.push_back(grootsteMesh);
+      // For the box cutting robot application: only add the biggest mesh as a surface since we are only interested in the upside surface of the box. This side will most of the times the most points when
+      // scanned from above.
+      mesh_markers_.markers.push_back(biggestMarker);
+      meshes_.push_back(biggestMesh);
 
       return true;
     }

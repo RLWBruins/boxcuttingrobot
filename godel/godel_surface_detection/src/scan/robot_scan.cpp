@@ -349,10 +349,10 @@ bool RobotScan::create_scan_trajectoryImproved(std::vector<geometry_msgs::Pose>&
   geometry_msgs::Pose pose;
   
   // Pose #1 : (just one scan pose is needed since one scan of the upside is enough)
-  transformation1.setRotation(tf::Quaternion(tf::Vector3(0, 1, 0), 3.14159265359/2.0));
-  transformation2.setRotation(tf::Quaternion(tf::Vector3(0, 0, 1), 3.14159265359));
-  transformation3.setOrigin(tf::Vector3(0.0, 0.55, 0.8));
-  transformation4.setRotation(tf::Quaternion(tf::Vector3(0, 0, 1), -3.14159265359/2.0));
+  transformation1.setRotation(tf::Quaternion(tf::Vector3(0, 1, 0), 3.14159265359/2.0)); // Rotation over y-axis within local frame
+  transformation2.setRotation(tf::Quaternion(tf::Vector3(0, 0, 1), 3.14159265359)); // Rotation over z-axis within local frame
+  transformation3.setOrigin(tf::Vector3(0.0, 0.55, 0.8)); // Translation within world_frame
+  transformation4.setRotation(tf::Quaternion(tf::Vector3(0, 0, 1), -3.14159265359/2.0));// Rotation over z-axis within local frame
   
   world_to_tcp = transformation4 * transformation3 * transformation2 * transformation1 * tcp_to_cam_tf.inverse();
   tf::poseTFToMsg(world_to_tcp, pose);

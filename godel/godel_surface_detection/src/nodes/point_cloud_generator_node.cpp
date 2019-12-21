@@ -171,15 +171,19 @@ protected:
     // Transform PointCloud to the frame of the 3D-camera :
     tf::Transform transformationMatrix = tf::Transform::getIdentity();
 
+    // Make rotation over z-axis in the local frame
     tf::Transform transformation1 = tf::Transform::getIdentity();
     transformation1.setRotation(tf::Quaternion(tf::Vector3(0, 0, 1), -3.14159265359));
 
+    // Make rotation over y-axis in the local frame
     tf::Transform transformation2 = tf::Transform::getIdentity();
     transformation2.setRotation(tf::Quaternion(tf::Vector3(0, 1, 0), 3.14159265359));
 
+    // Make an translation within the world_frame
     tf::Transform transformation3 = tf::Transform::getIdentity();
     transformation3.setOrigin(tf::Vector3(0.0, 0.55, 0.8));
 
+    // Make rotation over z-axis in the world_frame
     tf::Transform transformation4 = tf::Transform::getIdentity();
     transformation4.setRotation(tf::Quaternion(tf::Vector3(0, 0, 1), -3.14159265359/2.0));
 
